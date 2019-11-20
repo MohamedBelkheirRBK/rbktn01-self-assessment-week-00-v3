@@ -39,7 +39,7 @@
 //     }
 //   ]
 // };
-//
+
 // var livesInBerkeley = function (familyMember) {
 //   return familyMember.location === 'Berkeley';
 // }
@@ -51,6 +51,24 @@
 
 
 var filterFamilyMembers = function (familyTree, truthTest) {
-  // All your code in this function body
-};
+  var result = [];
 
+  function recursiveSearch(fam){
+  	if(truthTest(fam))
+  		result.push(fullName(fam))
+
+  	if(fam.children.length > 0){
+  		for(var child of fam.children){
+  			recursiveSearch(child);
+  		}
+  	}
+  }
+
+  function fullName(fam){
+  	return fam.firstName+' '+fam.lastName;
+  }
+
+  recursiveSearch(familyTree);
+  return result;
+
+};
